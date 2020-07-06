@@ -1,0 +1,22 @@
+Project details:
+This project it is a inventory system you can check if you have enough stock.
+If you want you can make a offer when you needed. You can see when the products is gonna 
+deliver.
+
+Project resourses:
+- Vue js
+- Vuetify
+- Vuex
+- Firebase
+
+TODO:
+✔ Install vuetify @done(20-07-05 19:26)
+✔ Install vuex @done(20-07-05 19:26)
+✔ Install firebase @done(20-07-05 19:26)
+✔ Install firestore @done(20-07-05 19:29)
+✔ Firebase make database @done(20-07-05 19:33)
+✔ Firebase connection @done(20-07-05 19:33)
+✔ Create register page @done(20-07-06 16:10)
+    - Send request to admin and the admin will make the account.
+- Create login page
+- Create navbar
