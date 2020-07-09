@@ -9,7 +9,6 @@ export default {
     computed: {
         hello() {
             var user = this.$store.state.email
-            console.log(user)
             return user
         }
     }

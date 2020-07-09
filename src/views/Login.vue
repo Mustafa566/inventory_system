@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-container fluid>
+      <h1 class="text-center">Register</h1>
       <v-row>
         <v-col class="centerAll" cols="3">
           <v-form lazy-validation @keyup.enter="register()">
