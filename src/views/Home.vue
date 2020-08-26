@@ -1,16 +1,12 @@
 <template>
   <div>
-      <h1 @click="hello">Homepage</h1>
+      <h1>Homepage</h1>
+      <router-link to="Login"><v-btn>Go to login page</v-btn></router-link>
   </div>
 </template>
 
 <script>
 export default {
-    computed: {
-        hello() {
-            var user = this.$store.state.email
-            return user
-        }
-    }
+    
 }
 </script>

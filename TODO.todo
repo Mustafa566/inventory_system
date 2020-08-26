@@ -8,6 +8,17 @@ Project resourses:
 - Vuetify
 - Vuex
 - Firebase
+https://www.freecodecamp.org/news/a-detailed-guide-to-integrating-apexcharts-with-vuejs/
+https://materialdesignicons.com/
+
+- Check here vuefire: https://www.youtube.com/watch?v=tkvQVt2sX7Y
+
+Designs:
+    - Login
+        https://cdn.dribbble.com/users/774806/screenshots/5739978/attachments/1239318/pre.jpg
+        https://cdn.dribbble.com/users/77111/screenshots/3069045/signup_curve.png
+        
+
 
 TODO:
 ✔ Install vuetify @done(20-07-05 19:26)
@@ -17,6 +28,9 @@ TODO:
 ✔ Firebase make database @done(20-07-05 19:33)
 ✔ Firebase connection @done(20-07-05 19:33)
 ✔ Create register page @done(20-07-06 16:10)
-    - Send request to admin and the admin will make the account.
-- Create login page
-- Create navbar
+✔ User can login backend @done(20-08-24 19:26)
+✘ Make a profile page and fill username, email and userId. Push to database @cancelled(20-08-26 14:12)
+✔ When register on button push: username, email (and more) to the database as data information @done(20-08-26 19:30)
+✘ Send a request (user) to the admin and the admin will make the account. @cancelled(20-08-26 13:32)
+✔ Create login page @done(20-08-26 13:36)
+✔ Create side navbar @done(20-08-26 15:27)

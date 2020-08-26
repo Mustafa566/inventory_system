@@ -1,4 +1,4 @@
-import Firebase from 'firebase'
+import firebase from 'firebase'
 import 'firebase/firestore'
 
  let config = {
@@ -11,5 +11,5 @@ import 'firebase/firestore'
     appId: "1:751253207926:web:7db883d69a9a02d2b59857"
   };
   
-let app = Firebase.initializeApp(config)
-export const db = app.database()
+// Get a Firestore instance
+export const db = firebase.initializeApp(config).firestore()

@@ -2,25 +2,29 @@
   <v-app id="app">
     <v-navigation-drawer v-model="drawer" app v-if="isLoggedIn">
       <v-list dense>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-email</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Contact</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <router-link to="Home" class="removeUnderline">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+        <router-link to="Profile" class="removeUnderline">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Profile</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
         <v-list-item link @click="logout" v-if="isLoggedIn">
           <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
+            <v-icon>mdi-logout</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Logout</v-list-item-title>
@@ -67,8 +71,8 @@ export default {
         if (currentUser) {
           this.user = firebase.auth().currentUser.email;
           this.isLoggedIn = true;
-          console.log(this.user);
-          console.log(this.isLoggedIn);
+          console.log(firebase.auth().currentUser.uid);
+          console.log(firebase.auth().currentUser.email);
         } else {
           console.log('no user'); 
         }
@@ -81,5 +85,33 @@ export default {
 .centerAll {
   margin: 0 auto;
   top: 50%;
+}
+
+.removeUnderline {
+  text-decoration: none;
+}
+
+/* LOGIN */
+.card {
+  width: 80%;
+  background-color: white;
+  margin: 5% auto;
+  border-radius: 15px;
+  box-shadow: 1px 1px 40px 0px black;
+}
+
+.svg {
+  width: 24px; 
+  height: 24px;
+  margin-right: 5px;
+}
+
+.googleIcon {
+  width: 30px; 
+  height: 30px;
+}
+
+.rightSide {
+  border-left: 2px solid black;
 }
 </style>
