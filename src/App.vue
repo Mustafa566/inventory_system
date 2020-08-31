@@ -12,6 +12,16 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
+        <router-link to="Accounts" class="removeUnderline" v-if="isAdmin">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-account-multiple-plus</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Manage Accounts</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
         <router-link to="Profile" class="removeUnderline">
           <v-list-item link>
             <v-list-item-action>
@@ -35,7 +45,7 @@
 
     <v-app-bar app color="indigo" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="isLoggedIn"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>{{currentUser}}</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -49,13 +59,16 @@
 </template>
 
 <script>
+/*eslint-disable-line*/import { db } from './Database';
 import firebase from 'firebase';
 export default {
     data() {
         return {
           drawer: null,
           isLoggedIn: false,
-          user: ''
+          isAdmin: false,
+          haveAccess: false,
+          currentUser: ''
         }
     },
     methods: {
@@ -66,13 +79,20 @@ export default {
         })
       }
     },
+    firestore: {
+      Profile: db.collection('Profile')
+    },
     created() {
       firebase.auth().onAuthStateChanged(currentUser => {
         if (currentUser) {
-          this.user = firebase.auth().currentUser.email;
+          this.currentUser = firebase.auth().currentUser.email;
           this.isLoggedIn = true;
           console.log(firebase.auth().currentUser.uid);
           console.log(firebase.auth().currentUser.email);
+          if(this.currentUser == 'mustafa@gmail.com') {
+            this.isAdmin = true
+            console.log(this.isAdmin)
+          }
         } else {
           console.log('no user'); 
         }

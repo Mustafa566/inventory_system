@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Account/Profile.vue'
+import Accounts from '../views/Admin/Accounts.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ Vue.use(VueRouter)
     path: '/Profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/Accounts',
+    name: 'Accounts',
+    component: Accounts
   }
 ]
 

@@ -3,11 +3,11 @@
         <v-container>
             <v-row>
                 <v-col class="centerAll" cols="6">
-                    <h1 class="text-center">Create Profile</h1>
+                    <h1 class="text-center">Send account request</h1>
                     <v-form lazy-validation @keyup.enter="createProfile()">
                         <v-text-field label="Username" v-model="profile.username" required></v-text-field>
-                        <v-text-field label="E-mail" v-model="profile.email" required></v-text-field>
-                        <v-btn color="success" @click="createProfile()" class="mr-4">Create Profile</v-btn>
+                        <v-select :items="role" label="Role" v-model="profile.role"></v-select>
+                        <v-btn color="success" @click="createProfile()" class="mr-4">Send</v-btn>
                     </v-form>
                 </v-col>
             </v-row>
@@ -30,25 +30,24 @@ export default {
         return {
             profile: {
                 username: '',
-                email: '',
+                role: '',
+                email: firebase.auth().currentUser.email,
                 userId: null
-            }
+            },
+            role: ['Admin', 'Customer', 'Sales Person', 'Foreman', 'Warehouse Worker', 'Truck Driver', 'Forklift Driver']
         }
     },
     methods: {
         async createProfile() {
-            if(this.profile.email == firebase.auth().currentUser.email) {
-                await db.collection('Profile').add({
-                    username: this.profile.username,
-                    email: this.profile.email,
-                    userId: firebase.auth().currentUser.uid,
-                    createdAt: date
-                })
-                this.profile.username = '';
-                this.profile.email = '';
-            } else {
-                console.log('not working')
-            }
+            await db.collection('Profile').add({
+                username: this.profile.username,
+                email: this.profile.email,
+                role: this.profile.role,
+                userId: firebase.auth().currentUser.uid,
+                createdAt: date,
+                haveAccess: false
+            })
+            this.profile.username = '';
         }
     },
     firestore: {

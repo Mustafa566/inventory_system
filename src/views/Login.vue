@@ -8,7 +8,7 @@
             <v-form lazy-validation @keyup.enter="login()">
               <v-text-field label="E-mail" v-model="email" required></v-text-field>
               <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show1 = !show1"></v-text-field>
-              <v-btn color="success" @click="login()" class="mr-4">Validate</v-btn>
+              <v-btn color="success" @click="login()" class="mr-4">Login</v-btn>
             </v-form>
             <v-btn color="success" @click="loginShow = false" class="mt-2">Create a account</v-btn>
           </v-col>
