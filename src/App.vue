@@ -22,6 +22,26 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
+        <router-link to="ViewProducts" class="removeUnderline" v-if="isAdmin">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-cart</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>View Products</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+        <router-link to="AddProducts" class="removeUnderline" v-if="isAdmin">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-plus-circle</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Add Products</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
         <router-link to="Profile" class="removeUnderline">
           <v-list-item link>
             <v-list-item-action>
@@ -44,8 +64,8 @@
     </v-navigation-drawer>
 
     <v-app-bar app color="indigo" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="isLoggedIn"></v-app-bar-nav-icon>
-      <v-toolbar-title>{{currentUser}}</v-toolbar-title>
+      <v-app-bar-nav-icon @click.stop="drawer =! drawer" v-if="isLoggedIn"></v-app-bar-nav-icon>
+      <v-toolbar-title>Interoute</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -64,7 +84,7 @@ import firebase from 'firebase';
 export default {
     data() {
         return {
-          drawer: null,
+          drawer: false,
           isLoggedIn: false,
           isAdmin: false,
           haveAccess: false,
@@ -87,11 +107,8 @@ export default {
         if (currentUser) {
           this.currentUser = firebase.auth().currentUser.email;
           this.isLoggedIn = true;
-          console.log(firebase.auth().currentUser.uid);
-          console.log(firebase.auth().currentUser.email);
           if(this.currentUser == 'mustafa@gmail.com') {
             this.isAdmin = true
-            console.log(this.isAdmin)
           }
         } else {
           console.log('no user'); 

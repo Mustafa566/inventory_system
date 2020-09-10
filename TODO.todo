@@ -18,7 +18,7 @@ Designs:
         https://cdn.dribbble.com/users/774806/screenshots/5739978/attachments/1239318/pre.jpg
         https://cdn.dribbble.com/users/77111/screenshots/3069045/signup_curve.png
         
-
+        - https://medium.com/@aaron_lu1/firebase-cloud-firestore-add-set-update-delete-get-data-6da566513b1b
 
 TODO:
 ✔ Install vuetify @done(20-07-05 19:26)
@@ -29,8 +29,25 @@ TODO:
 ✔ Firebase connection @done(20-07-05 19:33)
 ✔ Create register page @done(20-07-06 16:10)
 ✔ User can login backend @done(20-08-24 19:26)
-✘ Make a profile page and fill username, email and userId. Push to database @cancelled(20-08-26 14:12)
+✔ Make a profile page and fill username, email and userId. Push to database @done(20-09-01 01:09)
 ✔ When register on button push: username, email (and more) to the database as data information @done(20-08-26 19:30)
-✘ Send a request (user) to the admin and the admin will make the account. @cancelled(20-08-26 13:32)
 ✔ Create login page @done(20-08-26 13:36)
 ✔ Create side navbar @done(20-08-26 15:27)
+✔ Send a request (user) to the admin and the admin will make the account. @done(20-09-01 01:10)
+✔ Update function for profiles @done(20-09-07 02:28)
+✔ haveAccess == true than they can use the program @done(20-09-07 02:28)
+✔ Style update file @done(20-09-07 12:36)
+✔ Create a product catogorie page with options: Fruit, Vegetable etc @done(20-09-07 15:04)
+    - Fruit 
+    - Vegetable
+✔ Create a product page @done(20-09-10 22:36)
+    - Fruit: Apple, bananan, grape, kiwi, lemon, mango, orange, pear, pineapple, strawberry, watermelon 
+    - Vegetable: Cabbage, Radish, carrot, parsnip, Lettuce, Green bean, aubergine, tomato, Cucumber, sweet pepper
+    - With availability
+    - Quality of product
+    - Add button 
+    - Price
+✘ Create a delivery control page @cancelled(20-09-04 22:11)
+    - Which Products and how much
+    - Location information
+    - Price

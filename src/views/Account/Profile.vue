@@ -28,6 +28,7 @@ var date = day + '-' + month + '-' + year
 export default {
     data() {
         return {
+            currentUser: firebase.auth().currentUser.uid,
             profile: {
                 username: '',
                 role: '',
@@ -39,14 +40,16 @@ export default {
     },
     methods: {
         async createProfile() {
-            await db.collection('Profile').add({
+            const data = {
                 username: this.profile.username,
                 email: this.profile.email,
                 role: this.profile.role,
                 userId: firebase.auth().currentUser.uid,
                 createdAt: date,
                 haveAccess: false
-            })
+            };
+            const res = await db.collection('Profile').doc(this.currentUser).set(data);
+            console.log(res + data)
             this.profile.username = '';
         }
     },
