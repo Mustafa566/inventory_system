@@ -16,8 +16,8 @@
 </template>
 
 <script>
-/*eslint-disable-line*/import { db } from '../../Database';
 import firebase from 'firebase';
+/*eslint-disable-line*/import { db } from '../../Database';
 
 var d = new Date();
 var day = d.getDate();
@@ -55,6 +55,9 @@ export default {
     },
     firestore: {
         Profile: db.collection('Profile')
+    },
+    created() {
+        console.log(this.currentUser)
     }
 }
 </script>

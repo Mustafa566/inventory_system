@@ -41,7 +41,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10">
+                    <v-card shaped max-width='400' elevation="10" @click="choice.apple = true; fruit = null; vegetable = null">
                         <v-img
                         height="200"
                         width="400"
@@ -50,7 +50,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choice.bananan = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -60,7 +60,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10">
+                    <v-card shaped max-width='400' elevation="10" @click="choice.grape = true; fruit = null; vegetable = null">
                         <v-img
                         height="200"
                         width="400"
@@ -72,7 +72,7 @@
             <!-- second row -->
             <v-row>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choice.kiwi = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -82,7 +82,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choice.lemon = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -92,7 +92,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choice.mango = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -102,7 +102,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choice.orange = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -115,7 +115,7 @@
             <!-- third row -->
             <v-row>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choice.pear = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -125,7 +125,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choice.pineapple = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -135,7 +135,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choice.strawberry = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -145,7 +145,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choice.watermelon = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -156,7 +156,6 @@
                 </v-col>
             </v-row>
         </div>
-
         <!-- if vegetable is true  -->
         <div v-if="vegetable == true">
             <v-row>
@@ -170,7 +169,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10">
+                    <v-card shaped max-width='400' elevation="10" @click="choiceVeg.cabbage = true; fruit = null; vegetable = null">
                         <v-img
                         height="200"
                         width="400"
@@ -180,7 +179,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choiceVeg.radish = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -190,7 +189,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10">
+                    <v-card shaped max-width='400' elevation="10" @click="choiceVeg.carrot = true; fruit = null; vegetable = null">
                         <v-img
                         height="200"
                         width="400"
@@ -203,7 +202,7 @@
             <!-- Second row -->
             <v-row>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10">
+                    <v-card shaped max-width='400' elevation="10" @click="choiceVeg.parsnip = true; fruit = null; vegetable = null">
                         <v-img
                         height="200"
                         width="400"
@@ -212,7 +211,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10">
+                    <v-card shaped max-width='400' elevation="10" @click="choiceVeg.lettuce = true; fruit = null; vegetable = null">
                         <v-img
                         height="200"
                         width="400"
@@ -222,7 +221,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choiceVeg.greenBean = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -232,7 +231,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10">
+                    <v-card shaped max-width='400' elevation="10" @click="choiceVeg.aubergine = true; fruit = null; vegetable = null">
                         <v-img
                         height="200"
                         width="400"
@@ -245,7 +244,7 @@
             <!-- Third row -->
             <v-row>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10">
+                    <v-card shaped max-width='400' elevation="10" @click="choiceVeg.tomato = true; fruit = null; vegetable = null">
                         <v-img
                         height="200"
                         width="400"
@@ -254,7 +253,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10">
+                    <v-card shaped max-width='400' elevation="10" @click="choiceVeg.cucumber = true; fruit = null; vegetable = null">
                         <v-img
                         height="200"
                         width="400"
@@ -264,7 +263,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="3">
-                    <v-card shaped max-width='400' elevation="10"> 
+                    <v-card shaped max-width='400' elevation="10" @click="choiceVeg.sweetPepper = true; fruit = null; vegetable = null"> 
                         <v-img
                             height="200"
                             width="400"
@@ -275,15 +274,170 @@
                 </v-col>
             </v-row>
         </div>
+
+        <!-- When you click on product show that product data -->
+        <v-row v-if="choice.apple == true">
+            <Apple/>
+        </v-row>
+
+        <v-row v-if="choice.bananan == true">
+            <Bananan/>
+        </v-row>
+
+        <v-row v-if="choice.grape == true">
+            <Grape/>
+        </v-row>
+
+        <v-row v-if="choice.kiwi == true">
+            <Kiwi/>
+        </v-row>
+
+        <v-row v-if="choice.lemon == true">
+            <Lemon/>
+        </v-row>
+
+        <v-row v-if="choice.mango == true">
+            <Mango/>
+        </v-row>
+
+        <v-row v-if="choice.orange == true">
+            <Orange/>
+        </v-row>
+
+        <v-row v-if="choice.pear == true">
+            <Pear/>
+        </v-row>
+
+        <v-row v-if="choice.pineapple == true">
+            <Pineapple/>
+        </v-row>
+
+        <v-row v-if="choice.strawberry == true">
+            <Strawberry/>
+        </v-row>
+
+        <v-row v-if="choice.watermelon == true">
+            <Watermelon/>
+        </v-row>
+
+        <v-row v-if="choiceVeg.cabbage == true">
+            <Cabbage/>
+        </v-row>
+
+        <v-row v-if="choiceVeg.radish == true">
+            <Radish/>
+        </v-row>
+
+        <v-row v-if="choiceVeg.carrot == true">
+            <Carrot/>
+        </v-row>
+        
+        <v-row v-if="choiceVeg.parsnip == true">
+            <Parsnip/>
+        </v-row>
+
+        <v-row v-if="choiceVeg.lettuce == true">
+            <Lettuce/>
+        </v-row>
+
+        <v-row v-if="choiceVeg.greenBean == true">
+            <GreenBean/>
+        </v-row>
+        
+        <v-row v-if="choiceVeg.aubergine == true">
+            <Aubergine/>
+        </v-row>
+
+        <v-row v-if="choiceVeg.tomato == true">
+            <Tomato/>
+        </v-row>
+
+        <v-row v-if="choiceVeg.cucumber == true">
+            <Cucumber/>
+        </v-row>
+
+        <v-row v-if="choiceVeg.sweetPepper == true">
+            <SweetPepper/>
+        </v-row>
     </v-container>
 </template>
 
 <script>
+import Apple from '../../components/Fruit/Apple.vue'
+import Bananan from '../../components/Fruit/Bananan.vue'
+import Grape from '../../components/Fruit/Grape.vue'
+import Kiwi from '../../components/Fruit/Kiwi.vue'
+import Lemon from '../../components/Fruit/Lemonn.vue'
+import Mango from '../../components/Fruit/Mangoo.vue'
+import Orange from '../../components/Fruit/Orangee.vue'
+import Pear from '../../components/Fruit/Pear.vue'
+import Pineapple from '../../components/Fruit/Pineapple.vue'
+import Strawberry from '../../components/Fruit/Strawberry.vue'
+import Watermelon from '../../components/Fruit/Watermelon.vue'
+import Cabbage from '../../components/Vegetable/Cabbage.vue'
+import Radish from '../../components/Vegetable/Radish.vue'
+import Carrot from '../../components/Vegetable/Carrot.vue'
+import Parsnip from '../../components/Vegetable/Parsnipp.vue'
+import Lettuce from '../../components/Vegetable/Lettuce.vue'
+import GreenBean from '../../components/Vegetable/GreenBean.vue'
+import Aubergine from '../../components/Vegetable/Aubergine.vue'
+import Tomato from '../../components/Vegetable/Tomato.vue'
+import Cucumber from '../../components/Vegetable/Cucumber.vue'
+import SweetPepper from '../../components/Vegetable/SweetPepper.vue'
+
 export default {
+    components: {
+        Apple,
+        Bananan,
+        Grape,
+        Kiwi,
+        Lemon,
+        Mango,
+        Orange,
+        Pear,
+        Pineapple,
+        Strawberry,
+        Watermelon,
+        Cabbage,
+        Radish,
+        Carrot,
+        Parsnip,
+        Lettuce,
+        GreenBean,
+        Aubergine,
+        Tomato,
+        Cucumber,
+        SweetPepper
+    },
     data() {
         return {
             fruit: false,
-            vegetable: false
+            vegetable: false,
+            choiceVeg: {
+                cabbage: false,
+                radish: false,
+                carrot: false,
+                parsnip: false,
+                lettuce: false,
+                greenBean: false,
+                aubergine: false,
+                tomato: false,
+                cucumber: false,
+                sweetPepper: false
+            },
+            choice: {
+                apple: false,
+                bananan: false,
+                grape: false,
+                kiwi: false,
+                lemon: false,
+                mango: false,
+                orange: false,
+                pear: false,
+                pineapple: false,
+                strawberry: false,
+                watermelon: false
+            }
         }
     }
 }

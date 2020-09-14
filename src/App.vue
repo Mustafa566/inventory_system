@@ -88,7 +88,8 @@ export default {
           isLoggedIn: false,
           isAdmin: false,
           haveAccess: false,
-          currentUser: ''
+          currentUser: '',
+          Profile: []
         }
     },
     methods: {
