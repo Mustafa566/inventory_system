@@ -20,11 +20,13 @@
                             <td>{{Profiles.email}}</td>
                             <td>{{Profiles.userId}}</td>
                             <td>{{Profiles.role}}</td>
-                            <td>{{Profiles.haveAccess}}</td>
+                            <v-select :items="access" label="Access" v-model="haveAccess" v-if="openSelect"></v-select>
+                            <td v-if="!openSelect">{{Profiles.haveAccess}}</td>
                             <td>{{Profiles.createdAt}}</td>
-                            <router-link :to="{ name: 'Update', params: {id: Profiles.id} }" class="btn btn-warning removeUnderline">
-                                <v-btn color="warning" small class="mt-2">Update</v-btn>
-                            </router-link>
+                            <v-btn color="warning" small class="mt-2" v-if="!openSelect" @click="openSelect = true;">Update</v-btn>
+                            <v-btn color="warning" small class="mt-2" v-if="openSelect" @click="updateProfile(Profiles.id)">Update now</v-btn>
+                            <v-btn color="error" small class="mt-2 ml-2" v-if="openSelect" @click="openSelect = false;">Cancel</v-btn>
+                            <v-btn color="error" small class="mt-2 ml-2" v-if="!openSelect" @click="deleteProfile(Profiles.id)">Delete</v-btn>
                         </tr>
                     </tbody>
                 </template>
@@ -41,11 +43,34 @@ export default {
         return {
             Profile: [],
             username: '',
+            haveAccess: '',
+            access: [true, false],
+            openSelect: false,
             currentUser: firebase.auth().currentUser
         }
     },
     firestore: {
         Profile: db.collection('Profile')
+    },
+    methods: {
+        deleteProfile(doc) {
+            if(confirm('Are you sure ? ')) {
+                db.collection("Profile").doc(doc).delete().then(function() {
+                    console.log("Document successfully deleted!");
+                }).catch(function(error) {
+                    console.error("Error removing document: ", error);
+                });
+            } else {
+                console.log('nothing')
+            }
+        },
+        updateProfile(doc) {
+            db.collection('Profile').doc(doc).update({
+                haveAccess: this.haveAccess
+            });
+            console.log('updated')
+            this.openSelect = false;
+        }
     }
 }
 </script>

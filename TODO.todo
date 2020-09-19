@@ -50,9 +50,13 @@ TODO:
 ✔ Create all fruit and vegetable products in list @done(20-09-14 00:50)
 ✔ Gets all data from Firestore @done(20-09-14 00:50)
 ✔ Filters on which product you click @done(20-09-14 00:51)
-✘ Check if user has access for web application look app.vue @cancelled(20-09-14 01:47)
+✔ Update user profile function working with a easier way and deleted update file @done(20-09-19 02:40)
+✔ Delete user profile function working @done(20-09-19 02:40)
+@BUG You can only send once your profile to the admin if you have a profile in the database then the form disappear @cancelled(20-09-18 17:26)
+@BUG Check if user has access for web application look app.vue @cancelled(20-09-14 01:47)
     - v-for="Profiles in Profile" :key="Profiles.id"
-    - v-if="Profiles.haveAccess == false"
+    - v-if="currentUser == Profiles.email && currentId == Profiles.userId && Profiles.haveAccess == false"
+    - look on Profile.vue (mounted)
 ✘ Create a delivery control page @cancelled(20-09-04 22:11)
     - Which Products and how much
     - Location information

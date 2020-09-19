@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container>
-            <v-row>
+            <v-row v-if="openProfile">
                 <v-col class="centerAll" cols="6">
                     <h1 class="text-center">Send account request</h1>
                     <v-form lazy-validation @keyup.enter="createProfile()">
@@ -9,6 +9,12 @@
                         <v-select :items="role" label="Role" v-model="profile.role"></v-select>
                         <v-btn color="success" @click="createProfile()" class="mr-4">Send</v-btn>
                     </v-form>
+                </v-col>
+            </v-row>
+
+            <v-row v-else>
+                <v-col class="centerAll" cols="6">
+                    <h1 class="text-center">Try again</h1>
                 </v-col>
             </v-row>
         </v-container>
@@ -25,9 +31,15 @@ var month = d.getMonth() + 1;
 var year = d.getFullYear();
 var date = day + '-' + month + '-' + year
 
+
 export default {
+    firestore: {
+        Profile: db.collection('Profile')
+    },
     data() {
         return {
+            openProfile: false,
+            Profile: [],
             currentUser: firebase.auth().currentUser.uid,
             profile: {
                 username: '',
@@ -53,11 +65,20 @@ export default {
             this.profile.username = '';
         }
     },
-    firestore: {
-        Profile: db.collection('Profile')
-    },
     created() {
-        console.log(this.currentUser)
+        if(firebase.auth().currentUser) {
+            this.currentUser = firebase.auth().currentUser.uid;
+            this.currentEmail = firebase.auth().currentUser.email;
+            console.log(this.currentUser);
+        }
+        const Profile = db.collection('Profile').doc(String(this.currentUser));
+        const doc = Profile.get();
+        if (doc.exists == this.currentUser) {
+            console.log('There is a document');
+        } else {
+            this.openProfile = true
+            console.log('No such document! ' + this.openProfile);
+        }
     }
 }
 </script>

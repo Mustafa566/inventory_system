@@ -12,7 +12,7 @@
     "@firebase/firestore": "^1.15.5",
     "@mdi/js": "^5.5.55",
     "core-js": "^3.6.5",
-    "firebase": "^7.20.0",
+    "firebase": "^7.21.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuefire": "^2.2.4",

@@ -89,6 +89,7 @@ export default {
           isAdmin: false,
           haveAccess: false,
           currentUser: '',
+          currentId: '',
           Profile: []
         }
     },
@@ -107,6 +108,7 @@ export default {
       firebase.auth().onAuthStateChanged(currentUser => {
         if (currentUser) {
           this.currentUser = firebase.auth().currentUser.email;
+          this.currentId = firebase.auth().currentUser.uid;
           this.isLoggedIn = true;
           if(this.currentUser == 'mustafa@gmail.com') {
             this.isAdmin = true
