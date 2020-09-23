@@ -6,7 +6,10 @@ import vuetify from './plugins/vuetify';
 import 'firebase/firestore'
 import { firestorePlugin } from 'vuefire'
 import { mdiAccount } from '@mdi/js'
- 
+import 'zingchart/es6';
+import zingchartVue from 'zingchart-vue';
+
+Vue.component('zingchart', zingchartVue)
 Vue.use(mdiAccount)
 Vue.use(firestorePlugin)
 Vue.config.productionTip = false

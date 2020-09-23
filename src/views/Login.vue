@@ -80,7 +80,7 @@ export default {
       register() {
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
           .then(/*eslint-disable-line*/user => {
-            this.$router.push('/Home');
+            this.$router.push('Profile');
             location.reload();
           },
           err => {  

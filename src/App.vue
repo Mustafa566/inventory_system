@@ -12,7 +12,7 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <router-link to="Accounts" class="removeUnderline" v-if="isAdmin">
+        <router-link to="Accounts" class="removeUnderline" v-if="roles.isAdmin">
           <v-list-item link>
             <v-list-item-action>
               <v-icon>mdi-account-multiple-plus</v-icon>
@@ -22,7 +22,7 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <router-link to="ViewProducts" class="removeUnderline" v-if="isAdmin">
+        <router-link to="ViewProducts" class="removeUnderline" v-if="roles.isAdmin || noAccess">
           <v-list-item link>
             <v-list-item-action>
               <v-icon>mdi-cart</v-icon>
@@ -32,7 +32,7 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <router-link to="AddProducts" class="removeUnderline" v-if="isAdmin">
+        <router-link to="AddProducts" class="removeUnderline" v-if="roles.isAdmin || noAccess">
           <v-list-item link>
             <v-list-item-action>
               <v-icon>mdi-plus-circle</v-icon>
@@ -42,7 +42,7 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <router-link to="Profile" class="removeUnderline">
+        <router-link to="Profile" class="removeUnderline" v-if="noAccount">
           <v-list-item link>
             <v-list-item-action>
               <v-icon>mdi-account</v-icon>
@@ -66,6 +66,13 @@
     <v-app-bar app color="indigo" dark>
       <v-app-bar-nav-icon @click.stop="drawer =! drawer" v-if="isLoggedIn"></v-app-bar-nav-icon>
       <v-toolbar-title>Interoute</v-toolbar-title>
+      <div v-for="Profiles in Profile" :key="Profiles.id" class="w-100">
+          <input 
+          v-if="currentUser == Profiles.email && currentId == Profiles.userId" 
+          id="role"
+          v-model="Profiles.role"
+          disabled>
+      </div>
     </v-app-bar>
 
     <v-main>
@@ -81,16 +88,20 @@
 <script>
 /*eslint-disable-line*/import { db } from './Database';
 import firebase from 'firebase';
+
 export default {
     data() {
         return {
+          Profiles: [],
+          roles: {
+            isAdmin: false
+          },
+          noAccess: false,
+          noAccount: true,
           drawer: false,
           isLoggedIn: false,
-          isAdmin: false,
-          haveAccess: false,
           currentUser: '',
           currentId: '',
-          Profile: []
         }
     },
     methods: {
@@ -106,13 +117,52 @@ export default {
     },
     created() {
       firebase.auth().onAuthStateChanged(currentUser => {
-        if (currentUser) {
+        if(currentUser) {
           this.currentUser = firebase.auth().currentUser.email;
           this.currentId = firebase.auth().currentUser.uid;
           this.isLoggedIn = true;
-          if(this.currentUser == 'mustafa@gmail.com') {
-            this.isAdmin = true
-          }
+          // Check if it is Admin
+          var documentReference = db.collection('Profile').doc(this.currentId);
+          documentReference.get().then((documentSnapshot) => {
+            // check and do something with the data here.
+            if (documentSnapshot.exists) {
+              // do something with the data
+              var data = documentSnapshot.data();
+              if(data.role == 'Admin') {
+                console.log(data.role)
+                this.roles.isAdmin = true
+              }
+            } else {
+              console.log('document not found');
+            }
+          });
+
+          // Check if user has access
+          documentReference.get().then((documentSnapshot) => {
+            // check and do something with the data here.
+            if (documentSnapshot.exists) {
+              // do something with the data
+              var data = documentSnapshot.data();
+              if(data.haveAccess == true) {
+                this.noAccess = true
+              }
+            } else {
+              console.log('document not found');
+            }
+          });
+
+          // Check if user has not a profile
+          documentReference.get().then((documentSnapshot) => {
+            // check and do something with the data here.
+            if (documentSnapshot.exists) {
+              // do something with the data
+              var data = documentSnapshot.data();
+              console.log(data)
+              this.noAccount = false
+            } else {
+              console.log('document not found');
+            }
+          });          
         } else {
           console.log('no user'); 
         }
@@ -153,5 +203,20 @@ export default {
 
 .rightSide {
   border-left: 2px solid black;
+}
+
+.w-100 {
+  right: 5px;
+  position: absolute;
+}
+
+#role {
+  color: white;
+  font-size: large;
+  width: 160px;
+}
+
+.users {
+  background-image: url('~@/assets/users.png');
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container>
-            <v-row v-if="openProfile">
+            <v-row>
                 <v-col class="centerAll" cols="6">
                     <h1 class="text-center">Send account request</h1>
                     <v-form lazy-validation @keyup.enter="createProfile()">
@@ -9,12 +9,6 @@
                         <v-select :items="role" label="Role" v-model="profile.role"></v-select>
                         <v-btn color="success" @click="createProfile()" class="mr-4">Send</v-btn>
                     </v-form>
-                </v-col>
-            </v-row>
-
-            <v-row v-else>
-                <v-col class="centerAll" cols="6">
-                    <h1 class="text-center">Try again</h1>
                 </v-col>
             </v-row>
         </v-container>
@@ -38,7 +32,6 @@ export default {
     },
     data() {
         return {
-            openProfile: false,
             Profile: [],
             currentUser: firebase.auth().currentUser.uid,
             profile: {
@@ -63,22 +56,28 @@ export default {
             const res = await db.collection('Profile').doc(this.currentUser).set(data);
             console.log(res + data)
             this.profile.username = '';
+            setTimeout(function () { location.reload(true); }, 2000);
+            this.$router.push({ path: 'Home' })
         }
     },
     created() {
         if(firebase.auth().currentUser) {
             this.currentUser = firebase.auth().currentUser.uid;
             this.currentEmail = firebase.auth().currentUser.email;
-            console.log(this.currentUser);
         }
-        const Profile = db.collection('Profile').doc(String(this.currentUser));
-        const doc = Profile.get();
-        if (doc.exists == this.currentUser) {
-            console.log('There is a document');
-        } else {
-            this.openProfile = true
-            console.log('No such document! ' + this.openProfile);
-        }
+        // Check if it is Admin
+          var documentReference = db.collection('Profile').doc(this.currentId);
+          documentReference.get().then((documentSnapshot) => {
+            // check and do something with the data here.
+            if (documentSnapshot.exists) {
+                // do something with the data
+                var data = documentSnapshot.data();
+                console.log(data)
+                this.$router.push({ path: 'Home' })
+            } else {
+                console.log('document not found');
+            }
+          });
     }
 }
 </script>
