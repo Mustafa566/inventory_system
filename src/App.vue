@@ -129,7 +129,7 @@ export default {
               // do something with the data
               var data = documentSnapshot.data();
               if(data.role == 'Admin') {
-                console.log(data.role)
+                // console.log(data.role)
                 this.roles.isAdmin = true
               }
             } else {
@@ -156,8 +156,8 @@ export default {
             // check and do something with the data here.
             if (documentSnapshot.exists) {
               // do something with the data
-              var data = documentSnapshot.data();
-              console.log(data)
+              // var data = documentSnapshot.data();
+              // console.log(data)
               this.noAccount = false
             } else {
               console.log('document not found');
@@ -218,5 +218,32 @@ export default {
 
 .users {
   background-image: url('~@/assets/users.png');
+}
+
+.cartImg {
+  padding: 10px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.cartImg:hover {
+  background-color: lightgray;
+  border-radius: 50px;
+}
+
+.cart {
+  height: 24px; 
+  width: 24px;
+  margin: 0 auto;
+}
+
+.openCart {
+  max-width: 600px;
+  max-height: 100%;
+  padding: 10px;
+  background-color: #3f51b5;
+  color: white;
+  position: absolute;
+  z-index: 1;
 }
 </style>

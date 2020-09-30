@@ -1,8 +1,34 @@
 <template>
     <v-container>
         <v-row>
-            <v-col>
+            <v-col cols="9">
                 <h1 class="text-center">products page</h1>
+            </v-col>
+            <v-col>
+                 <div class="cartImg">
+                     <v-img class="cart" src="@/assets/cart-plus.png" @click="cartOpen = !cartOpen"></v-img>
+                 </div>
+                 <div class="openCart" v-if="cartOpen">
+                     <v-row v-if="!shopItem.lenght">
+                         <v-col>
+                             <p>No items</p>
+                         </v-col>
+                     </v-row>
+                     <v-row v-for="shopItems in shopItem" :key="shopItems.id">
+                         <v-col>
+                             <p>{{shopItems.product}}</p>
+                         </v-col>
+                         <v-col>
+                             <p>{{shopItems.catogorie}}</p>
+                         </v-col>
+                         <v-col>
+                             <p>{{shopItems.price}}</p>
+                         </v-col>
+                         <v-col>
+                             <v-btn @click="deleteItem(shopItems.id)">X</v-btn>
+                         </v-col>
+                     </v-row>
+                 </div>
             </v-col>
         </v-row>
         <!-- Catogorie of products -->
@@ -384,8 +410,13 @@ import Aubergine from '../../components/Vegetable/Aubergine.vue'
 import Tomato from '../../components/Vegetable/Tomato.vue'
 import Cucumber from '../../components/Vegetable/Cucumber.vue'
 import SweetPepper from '../../components/Vegetable/SweetPepper.vue'
+/*eslint-disable-line*/import { db } from '../../Database';
+import firebase from 'firebase';
 
 export default {
+    firestore: {
+        StoreCart: db.collection('StoreCart')
+    },
     components: {
         Apple,
         Bananan,
@@ -411,8 +442,14 @@ export default {
     },
     data() {
         return {
+            shopItem: [],
+            product: '',
+            catogorie: '',
+            price: '',
+            userId: '',
             fruit: false,
             vegetable: false,
+            cartOpen: false,
             choiceVeg: {
                 cabbage: false,
                 radish: false,
@@ -437,8 +474,42 @@ export default {
                 pineapple: false,
                 strawberry: false,
                 watermelon: false
-            }
+            },
         }
+    },
+    methods: {
+        deleteItem(doc) {
+            db.collection("StoreCart").doc(doc).delete().then(function() {
+                console.log("Document successfully deleted!");
+                location.reload()
+            }).catch(function(error) {
+                console.error("Error removing document: ", error);
+            });
+        }
+    },
+    created() {
+        firebase.auth().onAuthStateChanged(userId => {
+            if(userId) {
+                this.userId = firebase.auth().currentUser.uid;
+                db.collection("StoreCart").get().then((res) => {
+                    res.docs.map((doc) => {
+                        // console.log(doc.data().userId)
+                        if(doc.data().userId == this.userId) {
+                            this.product = doc.data().catogorie
+                            this.catogorie = doc.data().catogorie
+                            this.price = doc.data().price
+                            this.shopItem.push({
+                                id: doc.id,
+                                product: doc.data().product,
+                                catogorie: doc.data().catogorie,
+                                price: doc.data().price
+                            })
+                        }
+                    })
+                })
+            }
+        })
+        console.log(this.shopItem.lenght)
     }
 }
 </script>

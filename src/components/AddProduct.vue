@@ -160,7 +160,7 @@ export default {
                     addProducts: this.addProducts
                 });
                 console.log(this.addProducts)
-                // this.$router.push('/ViewProducts')
+                this.$router.push('/ViewProducts')
             } else {
                 this.errorAlert = true
             }

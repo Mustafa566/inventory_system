@@ -18,6 +18,7 @@
                         <th class="text-left">Location</th>
                         <th class="text-left">Country</th>
                         <th class="text-left">Date</th>
+                        <th class="text-left">Buy</th>
                     </tr>
                 </thead>
                 <tbody v-for="product in Products" :key="product.id">
@@ -34,6 +35,9 @@
                         <td>{{product.addProducts.location}}</td>
                         <td>{{product.addProducts.country}}</td>
                         <td>{{product.addProducts.date}}</td>
+                        <td>
+                            <v-btn @click="getItem(product.id)">Buy</v-btn>
+                        </td>
                     </tr>
                 </tbody>
             </template>
@@ -45,23 +49,82 @@
 /*eslint-disable-line*/import { db } from '../../Database';
 import firebase from 'firebase';
 
+var d = new Date();
+var day = d.getDate();
+var month = d.getMonth() + 1;
+var year = d.getFullYear();
+var date = day + '-' + month + '-' + year
+
 export default {
     firestore: {
-        Products: db.collection('Products')
+        Products: db.collection('Products'),
+        StoreCart: db.collection('StoreCart')
     },
     data() {
         return {
-            Products: []
+            Products: [],
+            showItem: '',
+            addCart: {
+                catogorie: '',
+                product: '', 
+                quality: '',
+                availability: '',
+                price: '',
+                firstName: '',
+                lastName: '',
+                companyName: '',
+                email: '',
+                location: '',
+                country: '',
+                date: '',
+                userId: firebase.auth().currentUser.uid
+            }
         }
     },
     methods: {
         back() {
             location.reload();
             console.log(firebase.auth().currentUser)
+        },
+        getItem(doc) {
+            var documentReference = db.collection('Products').doc(doc);
+            documentReference.get().then((documentSnapshot) => {
+                if (documentSnapshot.exists) {
+                    var data = documentSnapshot.data();
+                    this.addCart.catogorie = data.addProducts.catogorie
+                    this.addCart.product = data.addProducts.product
+                    this.addCart.quality = data.addProducts.quality
+                    this.addCart.availability = data.addProducts.availability
+                    this.addCart.price = data.addProducts.price
+                    this.addCart.firstName = data.addProducts.firstName
+                    this.addCart.lastName = data.addProducts.lastName
+                    this.addCart.companyName = data.addProducts.companyName
+                    this.addCart.email = data.addProducts.email
+                    this.addCart.location = data.addProducts.location
+                    this.addCart.country = data.addProducts.country
+                    this.addCart.date = date
+                    db.collection('StoreCart').add({
+                        catogorie: this.addCart.catogorie,
+                        product: this.addCart.product,
+                        quality: this.addCart.quality,
+                        availability: this.addCart.availability,
+                        price: this.addCart.price,
+                        firstName: this.addCart.firstName,
+                        lastName: this.addCart.lastName,
+                        companyName: this.addCart.companyName,
+                        email: this.addCart.email,
+                        location: this.addCart.location,
+                        country: this.addCart.country,
+                        date: this.addCart.date,
+                        userId: this.addCart.userId
+                    });
+                    console.log(this.addCart)
+                } else {
+                    console.log('document not found');
+                    console.log(doc)
+                }
+            });
         }
-    },
-    created() {
-        console.log(this.Products)
     }
 }
 </script>

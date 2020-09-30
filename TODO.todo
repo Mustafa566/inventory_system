@@ -59,6 +59,14 @@ TODO:
 ✔ Admin page see how many users don't have access @done(20-09-20 16:49)
 ✔ Admin page see what roles users are and how many @done(20-09-20 16:25)
 ✔ User haveAcces is true show view and add products @done(20-09-23 19:12)
+✔ View product page add cart icon @done(20-09-26 16:11)
+✔ Button get item send to database with new collection (storeCart), Document (userId), collection (catogrie, product, quality, availability, price, firt name, last name, company name, email, location, country, date) @done(20-09-26 19:43)
+✔ Product page get item from database and show in cart (Product, catogorie, price) @done(20-09-28 01:58)
+✔ Delete item from cart @done(20-09-28 14:29)
+✘ Purchase button from storeCart @cancelled(20-09-28 14:32)
+✘ Purchase button onclick goes to order page @cancelled(20-09-28 14:34)
+✘ Order page see every item on a table row @cancelled(20-09-28 14:34)
+✘ Order page button with buy and show purchase is done @cancelled(20-09-28 14:35)
 ✘ Create a delivery control page @cancelled(20-09-04 22:11)
     - Which Products and how much
     - Location information
