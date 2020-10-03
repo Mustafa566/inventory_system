@@ -5,7 +5,7 @@
                 <h1 class="text-center">Make a order</h1>
             </v-col>
         </v-row>
-            <v-simple-table class="mt-16">
+            <!-- <v-simple-table class="mt-16">
                 <template v-slot:default>
                     <thead>
                         <tr>
@@ -36,10 +36,27 @@
                             </tr>
                             <v-btn @click="min(shopItems.id)">Buy</v-btn>
                         </tbody>
-                        
                     </template>
-            </v-simple-table>
-            
+            </v-simple-table> -->
+            <v-container>
+                <v-row>
+                    <v-col md="3" sm="12" v-for="shopItems in shopItem" :key="shopItems.id">
+                        <v-card elevation="4" outlined>
+                            <v-card-text class="cardPadding">First name: <b>{{shopItems.firstName}}</b></v-card-text>
+                            <v-card-text class="cardPadding">Last name: <b>{{shopItems.lastName}}</b></v-card-text>
+                            <v-card-text class="cardPadding">Email: <b>{{shopItems.email}}</b></v-card-text>
+                            <v-card-text class="cardPadding">Location: <b>{{shopItems.location}}</b></v-card-text>
+                            <v-card-text class="cardPadding">Country: <b>{{shopItems.country}}</b></v-card-text>
+                            <v-card-text class="cardPadding">Company name: <b>{{shopItems.companyName}}</b></v-card-text>
+                            <v-card-text class="cardPadding">Product: <b>{{shopItems.product}}</b></v-card-text>
+                            <v-card-text class="cardPadding">Quality: <b>{{shopItems.quality}}</b></v-card-text>
+                            <v-card-text class="cardPadding">Availability: <b>{{shopItems.availability}}</b></v-card-text>
+                            <v-card-text class="cardPadding">Price: <b>{{shopItems.cours}} {{shopItems.price}}</b></v-card-text>
+                            <v-btn @click="min(shopItems.id)" class="mb-5 ml-5">Buy</v-btn>
+                        </v-card>
+                    </v-col>
+                </v-row>
+            </v-container>
     </v-container>
 </template>
 
@@ -47,9 +64,16 @@
 /*eslint-disable-line*/import { db } from '../../Database';
 import firebase from 'firebase';
 
+var d = new Date();
+var day = d.getDate();
+var month = d.getMonth() + 1;
+var year = d.getFullYear();
+var date = day + '-' + month + '-' + year
+
 export default {
     firestore: {
-        StoreCart: db.collection('StoreCart')
+        StoreCart: db.collection('StoreCart'),
+        Products: db.collection('Products')
     },
     data() {
         return {
@@ -68,16 +92,31 @@ export default {
                     this.shopItem.forEach(doc => {
                         var newAvailability = doc.availability - 1
                         if(doc.availability > 1) {
+                            db.collection('Orders').add({
+                                availability: newAvailability,
+                                catogorie: documentSnapshot.data().catogorie,
+                                companyName: documentSnapshot.data().companyName,
+                                country: documentSnapshot.data().country,
+                                cours: documentSnapshot.data().cours,
+                                date: date,
+                                email: documentSnapshot.data().email,
+                                firstName: documentSnapshot.data().firstName,
+                                lastName: documentSnapshot.data().lastName,
+                                location: documentSnapshot.data().location,
+                                price: documentSnapshot.data().price,
+                                product: documentSnapshot.data().product,
+                                quality: documentSnapshot.data().quality,
+                                userId: documentSnapshot.data().userId
+                            })
                             productDb.update({
                                 availability: newAvailability
                             });
                             console.log(newAvailability)
-                            console.log('Updated')
                         } else {
                             console.log('0 items left')
-                            productDb.update({
-                                availability: 'Out of stock'
-                            });
+                            // productDb.update({
+                            //     availability: 'Out of stock'
+                            // });
                         }
                     });
                 } else {
@@ -88,12 +127,26 @@ export default {
             var shopDb = db.collection('StoreCart').doc(doc);
             shopDb.get().then((documentSnapshot) => {
                 if(documentSnapshot.exists) {
-                    // this.shopItem.forEach(doc => {
-                        // console.log(doc.docId)
+                    this.shopItem.forEach(doc => {
+                        var newAvailability = doc.availability - 1
+                        console.log(doc.docId)
+                        if(doc.availability > 1) {
+                            shopDb.update({
+                                availability: newAvailability
+                            });
+                            console.log(newAvailability)
+                            console.log('Updated')
+                            console.log('________')
+                        } else {
+                            console.log('0 items left')
+                            // shopDb.update({
+                            //     availability: 'Out of stock'
+                            // });
+                        }
                         // shopDb.delete().then(function() {
                         //     console.log("Document successfully deleted!");
                         // })
-                    // });
+                    });
                 } else {
                     console.log('document not found');
                 }

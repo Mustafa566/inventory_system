@@ -257,4 +257,8 @@ export default {
 .tr:hover {
   background-color: #324192 !important;
 }
+
+.cardPadding {
+  padding: 10px !important;
+}
 </style>

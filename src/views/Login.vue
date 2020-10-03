@@ -35,18 +35,12 @@
                 <v-icon class="svg">mdi-check</v-icon>
                 Create Account
               </v-btn>
-            <hr class="mt-5 mb-5">
+            <!-- <hr class="mt-5 mb-5"> -->
               <v-row>
-                <v-col cols="9">
-                  <v-row>
-                    <img class="googleIcon" src="@/assets/googleIcon.png">
-                    <p class="mt-1 ml-2">Sign Up with Google</p>
-                  </v-row>
-                </v-col>
                 <v-col>
                   <v-btn color="primary" rounded @click="loginShow = true">
                     <v-icon class="svg">mdi-login-variant</v-icon>
-                    Login
+                    Login page
                   </v-btn>
                 </v-col>
               </v-row>
