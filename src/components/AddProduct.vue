@@ -35,6 +35,7 @@
                 <v-col lg="3" md="3" sm="6" xs="12">
                     <v-text-field
                         v-model="addProducts.availability"
+                        type="number"
                         label="Availability"
                     ></v-text-field>
                 </v-col>
@@ -50,6 +51,7 @@
                 <v-col lg="3" md="3" sm="6" xs="12">
                     <v-text-field
                         v-model="addProducts.price"
+                        type="number"
                         label="Price"
                     ></v-text-field>
                 </v-col>
@@ -126,9 +128,9 @@ export default {
                 catogorie: '',
                 product: '',
                 quality: '',
-                availability: '',
+                availability: 0,
                 cours: '',
-                price: '',
+                price: 0,
                 firstName: '',
                 lastName: '',
                 companyName: '',
@@ -157,7 +159,20 @@ export default {
                 this.addProducts.country != ''
                 ) {
                 await db.collection('Products').add({
-                    addProducts: this.addProducts
+                    catogorie: this.addProducts.catogorie,
+                    product: this.addProducts.product,
+                    quality: this.addProducts.quality,
+                    availability: this.addProducts.availability,
+                    cours: this.addProducts.cours,
+                    price: this.addProducts.price,
+                    firstName: this.addProducts.firstName,
+                    lastName: this.addProducts.lastName,
+                    companyName: this.addProducts.companyName,
+                    email: this.addProducts.email,
+                    location: this.addProducts.location,
+                    country: this.addProducts.country,
+                    userId: this.addProducts.userId,
+                    date: date
                 });
                 console.log(this.addProducts)
                 this.$router.push('/ViewProducts')

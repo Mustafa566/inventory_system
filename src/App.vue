@@ -239,11 +239,22 @@ export default {
 
 .openCart {
   max-width: 600px;
-  max-height: 100%;
+  max-height: 500px;
   padding: 10px;
   background-color: #3f51b5;
   color: white;
   position: absolute;
   z-index: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.shopTable {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.tr:hover {
+  background-color: #324192 !important;
 }
 </style>

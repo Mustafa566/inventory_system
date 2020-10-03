@@ -9,25 +9,29 @@
                      <v-img class="cart" src="@/assets/cart-plus.png" @click="cartOpen = !cartOpen"></v-img>
                  </div>
                  <div class="openCart" v-if="cartOpen">
-                     <v-row v-if="!shopItem.lenght">
+                     <v-row v-if="itemLenght == 0">
                          <v-col>
                              <p>No items</p>
                          </v-col>
                      </v-row>
-                     <v-row v-for="shopItems in shopItem" :key="shopItems.id">
-                         <v-col>
-                             <p>{{shopItems.product}}</p>
-                         </v-col>
-                         <v-col>
-                             <p>{{shopItems.catogorie}}</p>
-                         </v-col>
-                         <v-col>
-                             <p>{{shopItems.price}}</p>
-                         </v-col>
-                         <v-col>
-                             <v-btn @click="deleteItem(shopItems.id)">X</v-btn>
-                         </v-col>
-                     </v-row>
+                     <v-btn rounded class="my-5" @click="buyItems">Purchase</v-btn>
+                <v-simple-table class="shopTable">
+                    <template v-slot:default>
+                        <thead class="thead" v-if="itemLenght > 0">
+                            <th class="text-center">Product</th>
+                            <th class="text-center">Catogorie</th>
+                            <th class="text-center">Price</th>
+                        </thead>
+                            <tbody v-for="shopItems in shopItem" :key="shopItems.id">
+                                <tr class="tr">
+                                    <td><p>{{shopItems.product}}</p></td>
+                                    <td><p>{{shopItems.catogorie}}</p></td>
+                                    <td><p>{{shopItems.cours}} {{shopItems.price}}</p></td>
+                                    <td><v-btn @click="deleteItem(shopItems.id)">X</v-btn></td>
+                                </tr>
+                            </tbody>
+                     </template>
+                </v-simple-table>
                  </div>
             </v-col>
         </v-row>
@@ -443,9 +447,11 @@ export default {
     data() {
         return {
             shopItem: [],
+            itemLenght: 0,
             product: '',
             catogorie: '',
             price: '',
+            cours: '',
             userId: '',
             fruit: false,
             vegetable: false,
@@ -485,6 +491,9 @@ export default {
             }).catch(function(error) {
                 console.error("Error removing document: ", error);
             });
+        },
+        buyItems() {
+            this.$router.push('/Purchase')
         }
     },
     created() {
@@ -493,23 +502,24 @@ export default {
                 this.userId = firebase.auth().currentUser.uid;
                 db.collection("StoreCart").get().then((res) => {
                     res.docs.map((doc) => {
-                        // console.log(doc.data().userId)
                         if(doc.data().userId == this.userId) {
-                            this.product = doc.data().catogorie
+                            this.product = doc.data().product
                             this.catogorie = doc.data().catogorie
                             this.price = doc.data().price
+                            this.cours = doc.data().cours
                             this.shopItem.push({
                                 id: doc.id,
                                 product: doc.data().product,
                                 catogorie: doc.data().catogorie,
-                                price: doc.data().price
+                                price: doc.data().price,
+                                cours: doc.data().cours
                             })
                         }
+                        this.itemLenght = res.docs.length
                     })
                 })
             }
         })
-        console.log(this.shopItem.lenght)
     }
 }
 </script>

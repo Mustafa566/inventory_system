@@ -63,10 +63,15 @@ TODO:
 ✔ Button get item send to database with new collection (storeCart), Document (userId), collection (catogrie, product, quality, availability, price, firt name, last name, company name, email, location, country, date) @done(20-09-26 19:43)
 ✔ Product page get item from database and show in cart (Product, catogorie, price) @done(20-09-28 01:58)
 ✔ Delete item from cart @done(20-09-28 14:29)
-✘ Purchase button from storeCart @cancelled(20-09-28 14:32)
-✘ Purchase button onclick goes to order page @cancelled(20-09-28 14:34)
-✘ Order page see every item on a table row @cancelled(20-09-28 14:34)
+✔ Purchase button from storeCart @done(20-10-02 00:37)
+✔ Purchase button onclick goes to order page @done(20-10-02 00:37)
+✔ Order page see every item on a table row @done(20-10-02 00:37)
+✔ Buy button click Availability -1 if you order @done(20-10-03 13:33)
+✔ If Availability > 1 update Availability to Out of stock @done(20-10-03 13:35)
+✘ Make new database: orders and put data in @cancelled(20-10-03 13:36)
+✘ Delete Storecart when purchase @cancelled(20-10-03 13:35)
 ✘ Order page button with buy and show purchase is done @cancelled(20-09-28 14:35)
+✘ Order page when order is completen delete document of StoreCart @cancelled(20-10-02 00:37)
 ✘ Create a delivery control page @cancelled(20-09-04 22:11)
     - Which Products and how much
     - Location information

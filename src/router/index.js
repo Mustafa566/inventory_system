@@ -6,6 +6,7 @@ import Profile from '../views/User/Profile.vue'
 import Accounts from '../views/Admin/Accounts.vue'
 import ViewProducts from '../views/Products/ViewProducts.vue'
 import AddProducts from '../views/Products/AddProducts.vue'
+import Purchase from '../views/Products/Purchase.vue'
 
 Vue.use(VueRouter)
 
@@ -43,6 +44,11 @@ Vue.use(VueRouter)
     path: '/AddProducts',
     name: 'AddProducts',
     component: AddProducts
+  },
+  {
+    path: '/Purchase',
+    name: 'Purchase',
+    component: Purchase
   }
 ]
 

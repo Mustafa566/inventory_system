@@ -22,19 +22,19 @@
                     </tr>
                 </thead>
                 <tbody v-for="product in Products" :key="product.id">
-                    <tr v-if="product.addProducts.product == 'Apple'">
-                        <td>{{product.addProducts.catogorie}}</td>
-                        <td>{{product.addProducts.product}}</td>
-                        <td>{{product.addProducts.quality}}</td>
-                        <td>{{product.addProducts.availability}}</td>
-                        <td>{{product.addProducts.cours}} {{product.addProducts.price}}</td>
-                        <td>{{product.addProducts.firstName}}</td>
-                        <td>{{product.addProducts.lastName}}</td>
-                        <td>{{product.addProducts.companyName}}</td>
-                        <td>{{product.addProducts.email}}</td>
-                        <td>{{product.addProducts.location}}</td>
-                        <td>{{product.addProducts.country}}</td>
-                        <td>{{product.addProducts.date}}</td>
+                    <tr v-if="product.product == 'Apple'">
+                        <td>{{product.catogorie}}</td>
+                        <td>{{product.product}}</td>
+                        <td>{{product.quality}}</td>
+                        <td>{{product.availability}}</td>
+                        <td>{{product.cours}} {{product.price}}</td>
+                        <td>{{product.firstName}}</td>
+                        <td>{{product.lastName}}</td>
+                        <td>{{product.companyName}}</td>
+                        <td>{{product.email}}</td>
+                        <td>{{product.location}}</td>
+                        <td>{{product.country}}</td>
+                        <td>{{product.date}}</td>
                         <td>
                             <v-btn @click="getItem(product.id)">Buy</v-btn>
                         </td>
@@ -70,6 +70,7 @@ export default {
                 quality: '',
                 availability: '',
                 price: '',
+                cours: '',
                 firstName: '',
                 lastName: '',
                 companyName: '',
@@ -77,7 +78,8 @@ export default {
                 location: '',
                 country: '',
                 date: '',
-                userId: firebase.auth().currentUser.uid
+                userId: firebase.auth().currentUser.uid,
+                docId: ''
             }
         }
     },
@@ -91,24 +93,29 @@ export default {
             documentReference.get().then((documentSnapshot) => {
                 if (documentSnapshot.exists) {
                     var data = documentSnapshot.data();
-                    this.addCart.catogorie = data.addProducts.catogorie
-                    this.addCart.product = data.addProducts.product
-                    this.addCart.quality = data.addProducts.quality
-                    this.addCart.availability = data.addProducts.availability
-                    this.addCart.price = data.addProducts.price
-                    this.addCart.firstName = data.addProducts.firstName
-                    this.addCart.lastName = data.addProducts.lastName
-                    this.addCart.companyName = data.addProducts.companyName
-                    this.addCart.email = data.addProducts.email
-                    this.addCart.location = data.addProducts.location
-                    this.addCart.country = data.addProducts.country
+                    console.log(data)
+                    var docId = doc
+                    this.addCart.catogorie = data.catogorie
+                    this.addCart.product = data.product
+                    this.addCart.quality = data.quality
+                    this.addCart.availability = data.availability
+                    this.addCart.price = data.price
+                    this.addCart.cours = data.cours
+                    this.addCart.firstName = data.firstName
+                    this.addCart.lastName = data.lastName
+                    this.addCart.companyName = data.companyName
+                    this.addCart.email = data.email
+                    this.addCart.location = data.location
+                    this.addCart.country = data.country
                     this.addCart.date = date
+                    this.addCart.docId = docId
                     db.collection('StoreCart').add({
                         catogorie: this.addCart.catogorie,
                         product: this.addCart.product,
                         quality: this.addCart.quality,
                         availability: this.addCart.availability,
                         price: this.addCart.price,
+                        cours: this.addCart.cours,
                         firstName: this.addCart.firstName,
                         lastName: this.addCart.lastName,
                         companyName: this.addCart.companyName,
@@ -116,7 +123,8 @@ export default {
                         location: this.addCart.location,
                         country: this.addCart.country,
                         date: this.addCart.date,
-                        userId: this.addCart.userId
+                        userId: this.addCart.userId,
+                        docId: this.addCart.docId
                     });
                     console.log(this.addCart)
                 } else {

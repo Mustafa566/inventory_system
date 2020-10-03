@@ -7,6 +7,7 @@
                     <v-form lazy-validation @keyup.enter="createProfile()">
                         <v-text-field label="Username" v-model="profile.username" required></v-text-field>
                         <v-select :items="role" label="Role" v-model="profile.role"></v-select>
+                        <v-text-field label="Admin key" v-model="key" required v-if="getKeyInput"></v-text-field>
                         <v-btn color="success" @click="createProfile()" class="mr-4">Send</v-btn>
                     </v-form>
                 </v-col>
@@ -32,6 +33,9 @@ export default {
     },
     data() {
         return {
+            getKeyInput: false,
+            adminKey: 'afatsumAdmin566',
+            key: '',
             Profile: [],
             currentUser: firebase.auth().currentUser.uid,
             profile: {
@@ -45,19 +49,28 @@ export default {
     },
     methods: {
         async createProfile() {
-            const data = {
-                username: this.profile.username,
-                email: this.profile.email,
-                role: this.profile.role,
-                userId: firebase.auth().currentUser.uid,
-                createdAt: date,
-                haveAccess: false
-            };
-            const res = await db.collection('Profile').doc(this.currentUser).set(data);
-            console.log(res + data)
-            this.profile.username = '';
-            setTimeout(function () { location.reload(true); }, 2000);
-            this.$router.push({ path: 'Home' })
+            if(this.profile.role == 'Admin') {
+                this.getKeyInput = true
+                if(this.key == this.adminKey) {
+                    const data = {
+                        username: this.profile.username,
+                        email: this.profile.email,
+                        role: this.profile.role,
+                        userId: firebase.auth().currentUser.uid,
+                        createdAt: date,
+                        haveAccess: false
+                    };
+                    const res = await db.collection('Profile').doc(this.currentUser).set(data);
+                    console.log(res + data)
+                    this.profile.username = '';
+                    setTimeout(function () { location.reload(true); }, 2000);
+                    this.$router.push({ path: 'Home' })
+                } else {
+                    console.log('Key is not valid')
+                }
+            } else {
+                console.log('no admin')
+            }
         }
     },
     created() {
