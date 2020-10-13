@@ -114,9 +114,9 @@ export default {
                             console.log(newAvailability)
                         } else {
                             console.log('0 items left')
-                            // productDb.update({
-                            //     availability: 'Out of stock'
-                            // });
+                            productDb.update({
+                                availability: 'Out of stock'
+                            });
                         }
                     });
                 } else {
@@ -128,24 +128,10 @@ export default {
             shopDb.get().then((documentSnapshot) => {
                 if(documentSnapshot.exists) {
                     this.shopItem.forEach(doc => {
-                        var newAvailability = doc.availability - 1
-                        console.log(doc.docId)
-                        if(doc.availability > 1) {
-                            shopDb.update({
-                                availability: newAvailability
-                            });
-                            console.log(newAvailability)
-                            console.log('Updated')
-                            console.log('________')
-                        } else {
-                            console.log('0 items left')
-                            // shopDb.update({
-                            //     availability: 'Out of stock'
-                            // });
-                        }
-                        // shopDb.delete().then(function() {
-                        //     console.log("Document successfully deleted!");
-                        // })
+                        shopDb.delete().then(function() {
+                            console.log("Document successfully deleted!");
+                        })
+                        console.log(doc)
                     });
                 } else {
                     console.log('document not found');

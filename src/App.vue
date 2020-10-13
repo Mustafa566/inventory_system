@@ -102,6 +102,7 @@ export default {
           isLoggedIn: false,
           currentUser: '',
           currentId: '',
+          test: this.$store.state.test
         }
     },
     methods: {
@@ -116,6 +117,7 @@ export default {
       Profile: db.collection('Profile')
     },
     created() {
+      console.log(this.test)
       firebase.auth().onAuthStateChanged(currentUser => {
         if(currentUser) {
           this.currentUser = firebase.auth().currentUser.email;
