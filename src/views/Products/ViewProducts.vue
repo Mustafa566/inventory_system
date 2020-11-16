@@ -37,7 +37,7 @@
         </v-row>
         <!-- Catogorie of products -->
         <v-row v-if="fruit == false && vegetable == false">
-            <v-col sm="6">
+            <v-col sm="3">
                 <v-card shaped max-width='400' @click="fruit = true" elevation="10">
                     <v-img
                     height="200"
@@ -46,7 +46,7 @@
                     <h2 class="text-center py-3">Fruit</h2>
                 </v-card>
             </v-col>
-            <v-col md="" sm="6">
+            <v-col md="6" sm="6">
                 <v-card shaped max-width='400' @click="vegetable = true" elevation="10"> 
                     <v-img
                         height="200"

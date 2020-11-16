@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/User/Profile.vue'
+import Orders from '../views/User/Orders.vue'
 import Accounts from '../views/Admin/Accounts.vue'
 import ViewProducts from '../views/Products/ViewProducts.vue'
 import AddProducts from '../views/Products/AddProducts.vue'
@@ -29,6 +30,11 @@ Vue.use(VueRouter)
     path: '/Profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/Orders',
+    name: 'Orders',
+    component: Orders
   },
   {
     path: '/Accounts',

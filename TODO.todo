@@ -70,8 +70,9 @@ TODO:
 ✔ If Availability > 1 update Availability to Out of stock @done(20-10-03 13:35)
 ✔ Make new database: orders and put data in @done(20-10-03 21:34)
 ✔ Delete Storecart when purchase @done(20-10-04 16:00)
-✘ Order page button with buy and show purchase is done @cancelled(20-09-28 14:35)
-✘ Order page when order is completen delete document of StoreCart @cancelled(20-10-02 00:37)
+✔ Order page button with buy and show purchase is done @done(20-10-16 13:20)
+✔ Order page when order is completen delete document of StoreCart @done(20-10-16 13:23)
+✘ Create a Orders page @cancelled(20-10-16 13:24)
 ✘ Create a delivery control page @cancelled(20-09-04 22:11)
     - Which Products and how much
     - Location information

@@ -42,6 +42,16 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
+        <router-link to="Orders" class="removeUnderline" v-if="roles.isAdmin || noAccess">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-plus-circle</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Orders</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
         <router-link to="Profile" class="removeUnderline" v-if="noAccount">
           <v-list-item link>
             <v-list-item-action>

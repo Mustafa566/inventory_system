@@ -2,7 +2,17 @@
     <v-container>
         <v-row>
             <v-col>
-                <h1 class="text-center">Make a order</h1>
+                <v-alert
+                :value="alert"
+                color="green"
+                dark
+                border="top"
+                icon="mdi-check"
+                transition="scale-transition"
+                >
+                Thank you for your order. You can find all your orders in the orders page click below on the button.
+                </v-alert>
+                <h1 class="text-center" v-if="!alert">Make a order</h1>
             </v-col>
         </v-row>
             <!-- <v-simple-table class="mt-16">
@@ -41,7 +51,7 @@
             <v-container>
                 <v-row>
                     <v-col md="3" sm="12" v-for="shopItems in shopItem" :key="shopItems.id">
-                        <v-card elevation="4" outlined>
+                        <v-card elevation="4" outlined v-if="!alert">
                             <v-card-text class="cardPadding">First name: <b>{{shopItems.firstName}}</b></v-card-text>
                             <v-card-text class="cardPadding">Last name: <b>{{shopItems.lastName}}</b></v-card-text>
                             <v-card-text class="cardPadding">Email: <b>{{shopItems.email}}</b></v-card-text>
@@ -52,7 +62,7 @@
                             <v-card-text class="cardPadding">Quality: <b>{{shopItems.quality}}</b></v-card-text>
                             <v-card-text class="cardPadding">Availability: <b>{{shopItems.availability}}</b></v-card-text>
                             <v-card-text class="cardPadding">Price: <b>{{shopItems.cours}} {{shopItems.price}}</b></v-card-text>
-                            <v-btn @click="min(shopItems.id)" class="mb-5 ml-5">Buy</v-btn>
+                            <v-btn @click="min(shopItems.id); alert = true" class="mb-5 ml-5">Buy</v-btn>
                         </v-card>
                     </v-col>
                 </v-row>
@@ -81,7 +91,8 @@ export default {
             userId: '',
             availability: '',
             newAvailability: '',
-            docId: []
+            docId: [],
+            alert: false
         }
     },
     methods: {
